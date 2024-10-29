@@ -1,14 +1,13 @@
 # Modified from:
 #     https://github.com/github/gitignore/blob/master/Unity.gitignore
-
-/SaltMehuJam/[Ll]ibrary/
-/SaltMehuJam/[Uu]serSettings/
-/SaltMehuJam/[Tt]emp/
-/SaltMehuJam/[Oo]bj/
-/SaltMehuJam/[Bb]uild/
-/SaltMehuJam/[Bb]uilds/
-/SaltMehuJam/[Ll]ogs/
-/SaltMehuJam/[Mm]emoryCaptures/
+/[Uu]serSettings/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Mm]emoryCaptures/
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # [Aa]ssets/AssetStoreTools*
