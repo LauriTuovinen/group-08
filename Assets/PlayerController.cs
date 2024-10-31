@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
@@ -14,9 +16,25 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private float xAxis;
+    Animator anim; 
+    public static PlayerController Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else 
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent <Animator>();
     }
 
     // Update is called once per frame
@@ -25,6 +43,7 @@ public class PlayerController : MonoBehaviour
         GetInputs();
         Move();
         Jump();
+        Flip();
     }
 
     void GetInputs()
@@ -32,9 +51,22 @@ public class PlayerController : MonoBehaviour
         xAxis = Input.GetAxisRaw("Horizontal");
     }
 
+    void Flip()
+    {
+        if(xAxis < 0)
+        {
+            transform.localScale = new Vector2(-1, transform.localScale.y);
+        }
+        else if (xAxis > 0)
+        {
+            transform.localScale = new Vector2(1, transform.localScale.y);
+        }
+    }
+
     private void Move() 
     {
         rb.linearVelocity = new Vector2(walkSpeed * xAxis, rb.linearVelocity.y);
+        anim.SetBool("running", rb.linearVelocity.x != 0 && Grounded());
     }
 
     public bool Grounded()
@@ -61,5 +93,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
         }
+        anim.SetBool("jumping", !Grounded());
     }
 }
