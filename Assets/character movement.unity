@@ -709,7 +709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 10
   jumpForce: 25
-  jumpBufferFrames: 8
+  jumpBufferFrames: 2
   coyoteTime: 0.1
   groundCheckpoint: {fileID: 1197118779}
   groundCheckY: 0.2
@@ -1067,7 +1067,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1079320594}
   - {fileID: 145499334}
-  - {fileID: 1136628925}
   - {fileID: 1053127362}
   - {fileID: 607403846}
   - {fileID: 1901757621}
+  - {fileID: 1136628925}
