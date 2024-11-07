@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,8 +13,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float walkSpeed = 1;
     [SerializeField] private float jumpForce = 45f;
-    private int jumpBufferCounter = 0;
-    [SerializeField] private int jumpBufferFrames;
+    private float jumpBufferCounter = 0;
+    [SerializeField] private float jumpBufferFrames;
     private float coyoteTimeCounter = 0;
     [SerializeField] private float coyoteTime;
     [SerializeField] private Transform groundCheckpoint;
@@ -23,8 +24,14 @@ public class PlayerController : MonoBehaviour
 
     PlayerStateList pState;
     private Rigidbody2D rb;
-    private float xAxis;
+    private float xAxis, yAxis;
     Animator anim; 
+    bool attack = false;
+    float timeBetweenAttack, timeSinceAttack;
+
+    [SerializeField] Transform sideAttackTransform, upAttackTransform, downAttackTransform;
+    [SerializeField] Vector2 sideAttackArea, upAttackArea, downAttackArea;
+    [SerializeField] LayerMask attackableLayer;
     public static PlayerController Instance;
 
     private void Awake()
@@ -46,6 +53,15 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent <Animator>();
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
+        Gizmos.DrawWireCube(upAttackTransform.position, upAttackArea);
+        Gizmos.DrawWireCube(downAttackTransform.position, downAttackArea);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -54,11 +70,14 @@ public class PlayerController : MonoBehaviour
         Flip();
         Move();
         Jump();
+        Attack();
     }
 
     void GetInputs()
     {
         xAxis = Input.GetAxisRaw("Horizontal");
+        yAxis = Input.GetAxisRaw("Vertical");
+        attack = Input.GetMouseButtonDown(0);
     }
 
     void Flip()
@@ -78,6 +97,40 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(walkSpeed * xAxis, rb.linearVelocity.y);
         anim.SetBool("running", rb.linearVelocity.x != 0 && Grounded());
+    }
+
+    void Attack()
+    {
+        timeSinceAttack += Time.deltaTime;
+        if(attack && timeSinceAttack >= timeBetweenAttack)
+        {
+            timeSinceAttack = 0;
+            anim.SetTrigger("attacking");
+            Debug.Log("Attack!");
+
+            if(yAxis == 0 || yAxis < 0 && Grounded())
+            {
+                Hit(sideAttackTransform, sideAttackArea);
+            }
+            else if(yAxis > 0)
+            {
+                Hit(upAttackTransform, upAttackArea);
+            }
+            else if(yAxis < 0 && !Grounded())
+            {
+                Hit(downAttackTransform, downAttackArea);
+            }
+        }
+    }
+
+    private void Hit(Transform _attackTransform, Vector2 _attackArea)
+    {
+        Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
+
+        if(objectsToHit.Length > 0)
+        {
+            Debug.Log("Hit");
+        }
     }
 
     public bool Grounded()
@@ -130,7 +183,7 @@ public class PlayerController : MonoBehaviour
         }
         else 
         {
-            jumpBufferCounter--;
+            jumpBufferCounter = jumpBufferCounter - Time.deltaTime * 10;
         }
     }
 }
