@@ -27,11 +27,13 @@ public class PlayerController : MonoBehaviour
     private float xAxis, yAxis;
     Animator anim; 
     bool attack = false;
-    float timeBetweenAttack, timeSinceAttack;
+    [SerializeField] float timeBetweenAttack, timeSinceAttack;
 
     [SerializeField] Transform sideAttackTransform, upAttackTransform, downAttackTransform;
     [SerializeField] Vector2 sideAttackArea, upAttackArea, downAttackArea;
     [SerializeField] LayerMask attackableLayer;
+    [SerializeField] float damage;
+    [SerializeField] GameObject slashEffect; 
     public static PlayerController Instance;
 
     private void Awake()
@@ -111,14 +113,17 @@ public class PlayerController : MonoBehaviour
             if(yAxis == 0 || yAxis < 0 && Grounded())
             {
                 Hit(sideAttackTransform, sideAttackArea);
+                Instantiate(slashEffect, sideAttackTransform);
             }
             else if(yAxis > 0)
             {
                 Hit(upAttackTransform, upAttackArea);
+                SlashEffectAngle(slashEffect, 90, upAttackTransform);
             }
             else if(yAxis < 0 && !Grounded())
             {
                 Hit(downAttackTransform, downAttackArea);
+                SlashEffectAngle(slashEffect, -90, downAttackTransform);
             }
         }
     }
@@ -131,6 +136,20 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Hit");
         }
+        for(int i = 0; i < objectsToHit.Length; i++)
+        {
+            if(objectsToHit[i].GetComponent<Enemy>() != null)
+            {
+                objectsToHit[i].GetComponent<Enemy>().EnemyHit(damage);
+            }
+        }
+    }
+
+    void SlashEffectAngle(GameObject slashEffect, int effectAngle, Transform attackTransform)
+    {
+        slashEffect = Instantiate(slashEffect, attackTransform);
+        slashEffect.transform.eulerAngles = new Vector3(0,0, effectAngle);
+        slashEffect.transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
     }
 
     public bool Grounded()
