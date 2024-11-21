@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float recoilLenght;
     [SerializeField] protected float recoilFactor;
     [SerializeField] protected bool isRecoiling = false;
+
     protected float recoilTimer;
     protected Rigidbody2D rb;
     public Animator anim;

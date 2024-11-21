@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
 
     public int health;
     public int maxHealth;
+    public delegate void OnHealthChangedDelegate();
+    [HideInInspector] public OnHealthChangedDelegate onHealthChangedCallback;
+
     [HideInInspector] public PlayerStateList pState;
     private Rigidbody2D rb;
     private float xAxis, yAxis;
@@ -39,7 +42,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float timeBetweenAttack; 
     private float timeSinceAttack;
     private float gravity;
-    private int airJumpCounter;
 
     [SerializeField] Transform sideAttackTransform, upAttackTransform, downAttackTransform;
     [SerializeField] Vector2 sideAttackArea, upAttackArea, downAttackArea;
@@ -58,7 +60,7 @@ public class PlayerController : MonoBehaviour
         {
             Instance = this;
         }
-        health = maxHealth;
+        Health = maxHealth;
     }
 
     void Start()
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
         pState = GetComponent<PlayerStateList>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent <Animator>();
+        gravity = rb.gravityScale;
     }
 
     private void OnDrawGizmos()
@@ -86,6 +89,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         Attack();
+        Recoil();
     }
 
     void GetInputs()
@@ -143,7 +147,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool recoilDir, float recoilsStrength)
+    private void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool recoilDir, float recoilStrength)
     {
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
         List<Enemy>hitEnemies = new List<Enemy>();
@@ -157,7 +161,7 @@ public class PlayerController : MonoBehaviour
             Enemy e = objectsToHit[i].GetComponent<Enemy>();
             if(e && !hitEnemies.Contains(e))
             {
-                e.EnemyHit(damage, (transform.position - objectsToHit[i].transform.position).normalized, recoilsStrength);
+                e.EnemyHit(damage, (transform.position - objectsToHit[i].transform.position).normalized, recoilStrength);
                 hitEnemies.Add(e);
             }
         }
@@ -195,7 +199,6 @@ public class PlayerController : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocityX, -recoilYSpeed);
             }
-            airJumpCounter = 0;
         }
         else
         {
@@ -238,7 +241,7 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        health -= Mathf.RoundToInt(damage);
+        Health -= Mathf.RoundToInt(damage);
         StartCoroutine(StopDamage());
     }
 
@@ -246,14 +249,25 @@ public class PlayerController : MonoBehaviour
     {
         pState.invincible = true;
         anim.SetTrigger("takeDamage");
-        ClampHealth();
         yield return new WaitForSeconds(1f);
         pState.invincible = false;
     }
 
-    void ClampHealth()
+    public int Health
     {
-        health = Mathf.Clamp(health, 0, maxHealth);
+        get{return health;}
+        set
+        {
+            if(health != value)
+            {
+                health = Mathf.Clamp(value, 0, maxHealth);
+
+                if(onHealthChangedCallback != null)
+                {
+                    onHealthChangedCallback.Invoke();
+                }
+            }
+        }
     }
 
     public bool Grounded()
