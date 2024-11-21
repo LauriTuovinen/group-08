@@ -1,31 +1,42 @@
 fileFormatVersion: 2
-guid: 3503a79f1b9d59f4a8af006cb749f681
-AssetOrigin:
-  serializedVersion: 1
-  productId: 174788
-  packageName: Medieval Warrior Pack 2
-  packageVersion: 1.0
-  assetPath: Assets/Medieval Warrior Pack 2/Sprites/Take Hit - white silhouette.png
-  uploadId: 380671
+guid: a6e59c9e1702d7842b1906b90fedd5e1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8008791250619013794
-    second: Take Hit - white silhouette_0
+      213: -167946382065578268
+    second: TakeDamage_0
   - first:
-      213: 3891156215361153934
-    second: Take Hit - white silhouette_1
+      213: 7588337116346930349
+    second: TakeDamage_1
   - first:
-      213: -7146689698409757683
-    second: Take Hit - white silhouette_2
+      213: 3135866468932730120
+    second: TakeDamage_2
   - first:
-      213: 8523606802079886837
-    second: Take Hit - white silhouette_3
+      213: 3570204391061295125
+    second: TakeDamage_3
+  - first:
+      213: -1467740845321795900
+    second: TakeDamage_4
+  - first:
+      213: -5069916544903066193
+    second: TakeDamage_5
+  - first:
+      213: -763026289843109295
+    second: TakeDamage_6
+  - first:
+      213: 2497656269396420627
+    second: TakeDamage_7
+  - first:
+      213: -5897067001488749715
+    second: TakeDamage_8
+  - first:
+      213: -8311911410188436021
+    second: TakeDamage_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -53,7 +64,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -82,9 +93,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -113,32 +124,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Lumin
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -155,133 +140,221 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Take Hit - white silhouette_0
+      name: TakeDamage_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 53
-        width: 26
-        height: 41
+        x: 56
+        y: 42
+        width: 35
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 64eaef3e16820e14b82b7bb4417bb787
-      internalID: -8008791250619013794
+      spriteID: 4ee4ba3c7a55badf0800000000000000
+      internalID: -167946382065578268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit - white silhouette_1
+      name: TakeDamage_1
       rect:
         serializedVersion: 2
-        x: 183
-        y: 53
-        width: 23
-        height: 40
+        x: 196
+        y: 42
+        width: 35
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 310eed264223bac45b6ccd1349b4bac4
-      internalID: 3891156215361153934
+      spriteID: da455cf07603f4960800000000000000
+      internalID: 7588337116346930349
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit - white silhouette_2
+      name: TakeDamage_2
       rect:
         serializedVersion: 2
-        x: 333
-        y: 53
-        width: 23
-        height: 43
+        x: 335
+        y: 42
+        width: 39
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5924b840987660348b49fce771d7b737
-      internalID: -7146689698409757683
+      spriteID: 80d3bcf50f5d48b20800000000000000
+      internalID: 3135866468932730120
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit - white silhouette_3
+      name: TakeDamage_3
       rect:
         serializedVersion: 2
-        x: 483
-        y: 55
-        width: 23
-        height: 40
+        x: 477
+        y: 42
+        width: 37
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5f5092561824b4e44aacbcf706e700fd
-      internalID: 8523606802079886837
+      spriteID: 5109fb85af9eb8130800000000000000
+      internalID: 3570204391061295125
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit - white silhouette_4
+      name: TakeDamage_4
       rect:
         serializedVersion: 2
-        x: 633
-        y: 55
-        width: 23
-        height: 40
+        x: 618
+        y: 42
+        width: 36
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f23a2dbc44f6a764795cb9b69aed85f9
-      internalID: 1960246485
+      spriteID: 4c643444a7981abe0800000000000000
+      internalID: -1467740845321795900
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit - white silhouette_5
+      name: TakeDamage_5
       rect:
         serializedVersion: 2
-        x: 785
-        y: 55
-        width: 21
-        height: 41
+        x: 757
+        y: 42
+        width: 37
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e3ad1630990bf7e438176ec03598313b
-      internalID: 1476980387
+      spriteID: fad4d2493c904a9b0800000000000000
+      internalID: -5069916544903066193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TakeDamage_6
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 42
+        width: 35
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1520e9fc1af2965f0800000000000000
+      internalID: -763026289843109295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TakeDamage_7
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 42
+        width: 35
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 318a664d42579a220800000000000000
+      internalID: 2497656269396420627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TakeDamage_8
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 42
+        width: 35
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6bc59f5ec8692ea0800000000000000
+      internalID: -5897067001488749715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TakeDamage_9
+      rect:
+        serializedVersion: 2
+        x: 1316
+        y: 42
+        width: 35
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcdb33f5c9826ac80800000000000000
+      internalID: -8311911410188436021
       vertices: []
       indices: 
       edges: []
@@ -290,7 +363,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -300,12 +373,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Take Hit - white silhouette_0: -8008791250619013794
-      Take Hit - white silhouette_1: 3891156215361153934
-      Take Hit - white silhouette_2: -7146689698409757683
-      Take Hit - white silhouette_3: 8523606802079886837
-      Take Hit - white silhouette_4: 1960246485
-      Take Hit - white silhouette_5: 1476980387
+      TakeDamage_0: -167946382065578268
+      TakeDamage_1: 7588337116346930349
+      TakeDamage_2: 3135866468932730120
+      TakeDamage_3: 3570204391061295125
+      TakeDamage_4: -1467740845321795900
+      TakeDamage_5: -5069916544903066193
+      TakeDamage_6: -763026289843109295
+      TakeDamage_7: 2497656269396420627
+      TakeDamage_8: -5897067001488749715
+      TakeDamage_9: -8311911410188436021
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

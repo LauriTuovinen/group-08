@@ -6,15 +6,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float health;
     [SerializeField] protected float damage;
     [SerializeField] protected PlayerController player;
-    [SerializeField] float recoilLenght;
-    [SerializeField] float recoilFactor;
-    [SerializeField] bool isRecoiling = false;
-    float recoilTimer;
+    [SerializeField] protected float recoilLenght;
+    [SerializeField] protected float recoilFactor;
+    [SerializeField] protected bool isRecoiling = false;
+    protected float recoilTimer;
     protected Rigidbody2D rb;
+    public Animator anim;
 
     public virtual void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     protected virtual void Awake()
@@ -25,13 +26,14 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+
         if (health <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
         if (isRecoiling)
         {
-            if(recoilTimer < recoilLenght)
+            if (recoilTimer < recoilLenght)
             {
                 recoilTimer += Time.deltaTime;
             }
@@ -46,16 +48,18 @@ public class Enemy : MonoBehaviour
     public void EnemyHit(float damageDone, Vector2 hitDirection, float hitforce)
     {
         health -= damageDone;
-        if(!isRecoiling)
+        rb.linearVelocity = Vector2.zero;
+        anim.SetTrigger("takeDamage");
+        if (!isRecoiling)
         {
-            rb.AddForce(-hitforce*recoilFactor * hitDirection);
+            rb.AddForce(-hitforce * recoilFactor * hitDirection);
             isRecoiling = true;
         }
     }
 
     protected void OnTriggerStay2D(Collider2D Other)
     {
-        if(Other.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+        if (Other.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
         {
             Attack();
         }
@@ -65,4 +69,17 @@ public class Enemy : MonoBehaviour
         PlayerController.Instance.TakeDamage(damage);
     }
 
+    protected void Die()
+    {
+        rb.linearVelocity = Vector2.zero;
+        anim.SetTrigger("noHp");
+
+        Invoke("DestroyComponent", 2f);
+    }
+    protected void DestroyComponent()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
+        Destroy(gameObject);
+    }
 }

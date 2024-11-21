@@ -1,31 +1,50 @@
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : Enemy
 {
     public GameObject pointA;
     public GameObject pointB;
     public GameObject AttackPoint;
     public float speed;
-
     public float attackRange = 1.0f;
 
     private Transform currentPoint;
-    private Animator anim;
-    private Rigidbody2D rb;
-    public GameObject player;
+    public GameObject playerObject;
     public float attackCooldown = 0.5f;
     private float lastAttackTime = 0;
-    void Start()
+
+    public override void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        base.Start();
         currentPoint = pointB.transform;
         anim.SetBool("isWalking", true);
-        player = GameObject.FindWithTag("Player");
+        playerObject = GameObject.FindWithTag("Player");
+        Awake();
     }
 
-    void Update()
+    protected override void Update()
     {
+
+
+        if (health <= 0)
+        {
+            anim.SetBool("isWalking", false);
+            rb.linearVelocity = Vector2.zero;
+            Die();
+            return;
+        }
+        if (isRecoiling)
+        {
+            if (recoilTimer < recoilLenght)
+            {
+                recoilTimer += Time.deltaTime;
+            }
+            else
+            {
+                isRecoiling = false;
+                recoilTimer = 0;
+            }
+        }
         //Jos pelaaja on attackRangen sisällä, hyökkää, muuten kävelee 
         if (Vector2.Distance(AttackPoint.transform.position, player.transform.position) < attackRange)
         {
@@ -33,50 +52,53 @@ public class EnemyAI : MonoBehaviour
             if (Time.time >= lastAttackTime + attackCooldown)
             {
                 lastAttackTime = Time.time;
-                Attack();
+                BasicAttack();
             }
         }
         else
         {
             Patrol();
         }
-        
+
     }
 
-        void Patrol()
+
+
+    void Patrol()
+    {
+        anim.SetBool("isWalking", true);
+        Vector2 point = currentPoint.position - transform.position;
+        if (currentPoint == pointA.transform)
         {
-            anim.SetBool("isWalking", true);
-            Vector2 point = currentPoint.position - transform.position;
-            if (currentPoint == pointA.transform)
-            {
-                rb.linearVelocity = new Vector2(speed, 0);
-            }
-            else
-            {
-                rb.linearVelocity = new Vector2(-speed, 0);
-            }
-
-            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
-            {
-                flip();
-                currentPoint = pointA.transform;
-            }
-
-            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
-            {
-                flip();
-                currentPoint = pointB.transform;
-            }
+            rb.linearVelocity = new Vector2(speed, 0);
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(-speed, 0);
         }
 
+        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
+        {
+            flip();
+            currentPoint = pointA.transform;
+        }
 
-    private void Attack()
+        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
+        {
+            flip();
+            currentPoint = pointB.transform;
+        }
+    }
+
+
+    private void BasicAttack()
     {
 
         rb.linearVelocity = Vector2.zero;
         anim.SetTrigger("Attack");
-        print("player in attack range");
+
         anim.SetTrigger("afterAttack");
+        Attack();
     }
 
     private void flip()
