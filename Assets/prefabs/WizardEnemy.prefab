@@ -82,11 +82,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  damage: 10
+  damage: 2
   player: {fileID: 8898579517950503741, guid: 23b20a6595d3308438c293ecad781564, type: 3}
   recoilLenght: 0
   recoilFactor: 0
   isRecoiling: 0
+  anim: {fileID: 0}
 --- !u!114 &7635942491421274008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +244,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &8419751306905014510
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,12 +57,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void OnTriggerStay2D(Collider2D Other)
+    protected virtual void OnTriggerStay2D(Collider2D Other)
     {
-        if (Other.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
-        {
-            Attack();
-        }
+            if (Other.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+            {
+                Attack();
+            }
     }
     protected virtual void Attack()
     {

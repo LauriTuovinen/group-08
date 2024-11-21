@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4913674035486317898}
   - component: {fileID: 1916926983890097702}
-  - component: {fileID: 4347818219766142447}
   - component: {fileID: 5846860983502488946}
   - component: {fileID: 3202736450536427801}
   - component: {fileID: 5473900958133487026}
@@ -50,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3974ded5f3f214d90afa143085ab91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  damage: 0
+  health: 10
+  damage: 2
   player: {fileID: 8898579517950503741, guid: 23b20a6595d3308438c293ecad781564, type: 3}
   recoilLenght: 0
   recoilFactor: 0
@@ -62,22 +61,8 @@ MonoBehaviour:
   AttackPoint: {fileID: 5574470893076965810}
   speed: 4
   attackRange: 1
-  playerObject: {fileID: 0}
+  playerObject: {fileID: 1473578299685157736, guid: 23b20a6595d3308438c293ecad781564, type: 3}
   attackCooldown: 0.5
---- !u!114 &4347818219766142447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243001427483695451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef2067cb53fc624baffd399cca67543, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  maxHealth: 100
 --- !u!212 &5846860983502488946
 SpriteRenderer:
   m_ObjectHideFlags: 0

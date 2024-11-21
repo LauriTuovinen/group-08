@@ -1,17 +1,15 @@
 using UnityEngine;
 
-public class EnemyProjectile : MonoBehaviour
-{   
-    private GameObject player;
-    private Rigidbody2D rb;
+public class EnemyProjectile : Enemy
+{
     public float force;
+
     private float timer;
-    private Animator anim;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Start()
     {
+        Awake();
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
 
         Vector3 direction = player.transform.position - transform.position;
@@ -22,7 +20,7 @@ public class EnemyProjectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         timer += Time.deltaTime;
 
@@ -34,7 +32,14 @@ public class EnemyProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Attack();
+            anim.SetTrigger("hit");
+            rb.linearVelocity = Vector2.zero;
+            Invoke("DestroyComponent", 0.583f);
+        }
+        else if (other.gameObject.CompareTag("Ground"))
         {
             anim.SetTrigger("hit");
             rb.linearVelocity = Vector2.zero;
@@ -42,8 +47,4 @@ public class EnemyProjectile : MonoBehaviour
         }
     }
 
-    void DestroyComponent()
-    {
-           Destroy(gameObject);
-    }
 }
