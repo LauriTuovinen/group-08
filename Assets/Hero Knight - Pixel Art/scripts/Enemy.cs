@@ -6,9 +6,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float health;
     [SerializeField] protected float damage;
     [SerializeField] protected PlayerController player;
-    [SerializeField] float recoilLenght;
-    [SerializeField] float recoilFactor;
-    [SerializeField] bool isRecoiling = false;
+    [SerializeField] protected float recoilLenght;
+    [SerializeField] protected float recoilFactor;
+    [SerializeField] protected bool isRecoiling = false;
     float recoilTimer;
     protected Rigidbody2D rb;
 
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         health -= damageDone;
         if(!isRecoiling)
         {
-            rb.AddForce(-hitforce*recoilFactor * hitDirection);
+            rb.AddForce(-hitforce * recoilFactor * hitDirection);
             isRecoiling = true;
         }
     }
