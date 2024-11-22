@@ -83,13 +83,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInputs();
+        if(pState.alive)
+        {
+            GetInputs();
+        }
+        
         UpdateJumpVariables();
-        Flip();
-        Move();
-        Jump();
-        Attack();
-        Recoil();
+        if(pState.alive)
+        {
+            Flip();
+            Move();
+            Jump();
+            Attack();
+            Recoil();
+        }
+        
     }
 
     void GetInputs()
@@ -241,8 +249,19 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        Health -= Mathf.RoundToInt(damage);
-        StartCoroutine(StopDamage());
+        if(pState.alive)
+        {
+            Health -= Mathf.RoundToInt(damage);
+            if(Health <= 0)
+            {
+                Health = 0;
+                StartCoroutine(Death());
+            }
+            else
+            {
+                StartCoroutine(StopDamage());
+            }
+        }
     }
 
     IEnumerator StopDamage()
@@ -268,6 +287,15 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator Death()
+    {
+        pState.alive = false;
+        Time.timeScale = 1f;
+        anim.SetTrigger("Death");
+
+        yield return new WaitForSeconds(0.9f);
     }
 
     public bool Grounded()
