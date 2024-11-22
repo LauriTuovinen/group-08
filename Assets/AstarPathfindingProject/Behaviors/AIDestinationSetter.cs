@@ -8,7 +8,8 @@ namespace Pathfinding
 	public class AIDestinationSetter : VersionedMonoBehaviour
 	{
 		public Transform target;   // The target object this AI should follow
-
+		public float range = 5.0f;
+		private bool targetInRange = false;
 		private IAstarAI ai;
 		private bool targetInTriggerZone = false;  // Flag to track if the target is in this enemy's TriggerZone
 		public GameObject triggerZone;
@@ -25,33 +26,36 @@ namespace Pathfinding
 
 		void Update()
 		{
-			// Only set the destination if the target is in the trigger zone
-			if (target != null && ai != null && targetInTriggerZone)
+			if (target == null || ai == null)
+				return;
+
+			float distanceToTarget = Vector2.Distance(transform.position, target.position);
+
+			if (distanceToTarget <= range && !targetInRange)
+			{
+				targetInRange = true;
+				OnTargetEnterRange();
+			}
+			else if (distanceToTarget > range && targetInRange)
+			{
+				targetInRange = false;
+				OnTargetExitRange();
+			}
+
+			if (targetInRange)
 			{
 				ai.destination = target.position;
 			}
 		}
 
-		// Trigger event when the target enters the TriggerZone
-		private void OnTriggerEnter2D(Collider2D other)
+		private void OnTargetEnterRange()
 		{
-			// Check if the entering object is this enemy's target
-			if (other.transform == target)
-			{
-				targetInTriggerZone = true;
-			}
-			print("target entered");
+			Debug.Log("Target entered");
 		}
 
-		// Trigger event when the target exits the TriggerZone
-		private void OnTriggerExit2D(Collider2D other)
+		private void OnTargetExitRange()
 		{
-			// Check if the exiting object is this enemy's target
-			if (other.transform == target)
-			{
-				targetInTriggerZone = false;
-			}
-			print("target left");
+			Debug.Log("Target exited");
 		}
 	}
 }

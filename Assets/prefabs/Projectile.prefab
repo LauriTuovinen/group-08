@@ -103,6 +103,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a0fe5185ac762499ab5b982815f548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  damage: 4
+  player: {fileID: 0}
+  recoilLenght: 0
+  recoilFactor: 0
+  isRecoiling: 0
+  anim: {fileID: 0}
   force: 10
 --- !u!50 &525165524135978315
 Rigidbody2D:
