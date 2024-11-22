@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 724710534762428353}
   - component: {fileID: 72206992395736985}
   - component: {fileID: 8898579517950503741}
+  - component: {fileID: 6637417103131662153}
   m_Layer: 0
   m_Name: HeroKnight
   m_TagString: Player
@@ -240,6 +241,20 @@ MonoBehaviour:
     m_Bits: 64
   damage: 5
   slashEffect: {fileID: 4063765861175443817, guid: e9ae5f618af0d4c46af70dd64bc2fc46, type: 3}
+--- !u!114 &6637417103131662153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473578299685157736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5415b2698151b440bd61f4e7ddbf367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 1414900819831328897, guid: ad02352ed7b36a545aeb7044d0dadcc9, type: 3}
+  inventorysize: 6
 --- !u!1 &2285885729080135683
 GameObject:
   m_ObjectHideFlags: 0
