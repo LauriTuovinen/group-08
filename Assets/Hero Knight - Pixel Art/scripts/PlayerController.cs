@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpBufferFrames;
     private float coyoteTimeCounter = 0;
     [SerializeField] private float coyoteTime;
+    private int airJumpCounter = 0;
+    [SerializeField] private int maxAirJump;
     [SerializeField] private Transform groundCheckpoint;
     [SerializeField] private float groundCheckY = 0.2f; 
     [SerializeField] private float groundCheckX = 0.5f; 
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float damage;
     [SerializeField] GameObject slashEffect; 
     public static PlayerController Instance;
+
+    public bool unlockedDoubleJump;
 
     private void Awake()
     {
@@ -326,6 +330,12 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
                 pState.jumping = true;
             }
+            else if(!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump") && unlockedDoubleJump)
+            {
+                pState.jumping = true;
+                airJumpCounter++;
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
+            }
         }
         anim.SetBool("jumping", !Grounded());
     }
@@ -336,6 +346,7 @@ public class PlayerController : MonoBehaviour
         {
             pState.jumping = false;
             coyoteTimeCounter = coyoteTime;
+            airJumpCounter = 0;
         }
         else
         {
