@@ -1894,13 +1894,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeroKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 7108518610076204413, guid: 23b20a6595d3308438c293ecad781564, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7108518610076204413, guid: 23b20a6595d3308438c293ecad781564, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7108518610076204413, guid: 23b20a6595d3308438c293ecad781564, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.14
+      objectReference: {fileID: 0}
     - target: {fileID: 8981110300065664127, guid: 23b20a6595d3308438c293ecad781564, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.95
+      value: 14.854
       objectReference: {fileID: 0}
     - target: {fileID: 8981110300065664127, guid: 23b20a6595d3308438c293ecad781564, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.06
+      value: -5.821
       objectReference: {fileID: 0}
     - target: {fileID: 8981110300065664127, guid: 23b20a6595d3308438c293ecad781564, type: 3}
       propertyPath: m_LocalPosition.z
