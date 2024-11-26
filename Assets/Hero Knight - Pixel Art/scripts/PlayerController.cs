@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpBufferFrames;
     private float coyoteTimeCounter = 0;
     [SerializeField] private float coyoteTime;
+    private int airJumpCounter = 0;
+    [SerializeField] private int maxAirJump;
     [SerializeField] private Transform groundCheckpoint;
     [SerializeField] private float groundCheckY = 0.2f; 
     [SerializeField] private float groundCheckX = 0.5f; 
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float damage;
     [SerializeField] GameObject slashEffect; 
     public static PlayerController Instance;
+
+    public bool unlockedDoubleJump;
 
     private void Awake()
     {
@@ -83,13 +87,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInputs();
+        if(pState.alive)
+        {
+            GetInputs();
+        }
+        
         UpdateJumpVariables();
-        Flip();
-        Move();
-        Jump();
-        Attack();
-        Recoil();
+        if(pState.alive)
+        {
+            Flip();
+            Move();
+            Jump();
+            Attack();
+            Recoil();
+        }
+        
     }
 
     void GetInputs()
@@ -241,8 +253,19 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        Health -= Mathf.RoundToInt(damage);
-        StartCoroutine(StopDamage());
+        if(pState.alive)
+        {
+            Health -= Mathf.RoundToInt(damage);
+            if(Health <= 0)
+            {
+                Health = 0;
+                StartCoroutine(Death());
+            }
+            else
+            {
+                StartCoroutine(StopDamage());
+            }
+        }
     }
 
     IEnumerator StopDamage()
@@ -268,6 +291,15 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator Death()
+    {
+        pState.alive = false;
+        Time.timeScale = 1f;
+        anim.SetTrigger("Death");
+
+        yield return new WaitForSeconds(0.9f);
     }
 
     public bool Grounded()
@@ -298,6 +330,12 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
                 pState.jumping = true;
             }
+            else if(!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump") && unlockedDoubleJump)
+            {
+                pState.jumping = true;
+                airJumpCounter++;
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
+            }
         }
         anim.SetBool("jumping", !Grounded());
     }
@@ -308,6 +346,7 @@ public class PlayerController : MonoBehaviour
         {
             pState.jumping = false;
             coyoteTimeCounter = coyoteTime;
+            airJumpCounter = 0;
         }
         else
         {
