@@ -116,12 +116,12 @@ TextureImporter:
       name: health_potion_0
       rect:
         serializedVersion: 2
-        x: 135
-        y: 23
-        width: 226
-        height: 418
+        x: 0
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d0ace4b3aa4545f4e87bc1e1e7e49605
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      health_potion_0: 3861579366159045020
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
