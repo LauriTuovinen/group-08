@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 5568191235098484746}
   - component: {fileID: 5149571878461939013}
   - component: {fileID: 1473611645241250752}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 43317691626732245}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackPoint
   m_TagString: Attackable
   m_Icon: {fileID: 0}
