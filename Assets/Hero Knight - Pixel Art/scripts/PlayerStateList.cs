@@ -7,4 +7,5 @@ public class PlayerStateList : MonoBehaviour
     public bool invincible;
     public bool recoilX, recoilY;
     public bool alive;
+    public bool dashing = false;
 }

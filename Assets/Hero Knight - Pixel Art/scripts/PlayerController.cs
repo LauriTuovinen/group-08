@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Reflection;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -20,10 +21,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteTime;
     private int airJumpCounter = 0;
     [SerializeField] private int maxAirJump;
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashTime;
+    [SerializeField] private float dashCooldown;
+
     [SerializeField] private Transform groundCheckpoint;
     [SerializeField] private float groundCheckY = 0.2f; 
     [SerializeField] private float groundCheckX = 0.5f; 
     [SerializeField] private LayerMask whatIsGround;
+
+    private bool canDash = true;
+    private bool dashed;
 
     [SerializeField] int recoilXSteps = 5;
     [SerializeField] int recoilYSteps = 5;
@@ -53,6 +61,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
 
     public bool unlockedDoubleJump;
+    public bool unlockedDash;
+
 
     private void Awake()
     {
@@ -90,18 +100,16 @@ public class PlayerController : MonoBehaviour
         if(pState.alive)
         {
             GetInputs();
-        }
-        
-        UpdateJumpVariables();
-        if(pState.alive)
-        {
+            UpdateJumpVariables();
+            if (pState.dashing) return;
             Flip();
             Move();
             Jump();
+            StartDash();
             Attack();
             Recoil();
+            
         }
-        
     }
 
     void GetInputs()
@@ -130,6 +138,34 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(walkSpeed * xAxis, rb.linearVelocity.y);
         anim.SetBool("running", rb.linearVelocity.x != 0 && Grounded());
+    }
+
+    void StartDash()
+    {
+        if(Input.GetButtonDown("Dash") && canDash && !dashed && unlockedDash)
+        {
+            StartCoroutine(Dash());
+            dashed = true;
+        }
+
+        if(Grounded())
+        {
+            dashed = false;
+        }
+    }
+
+    IEnumerator Dash()
+    {
+        canDash = false;
+        pState.dashing = true;
+        anim.SetTrigger("dashing");
+        rb.gravityScale = 0;
+        rb.linearVelocity = new Vector2(transform.localScale.x * dashSpeed, 0);
+        yield return new WaitForSeconds(dashTime);
+        rb.gravityScale = gravity;
+        pState.dashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     void Attack()
