@@ -3,6 +3,7 @@ using UnityEngine;
 public class UnlockingDoubleJump : MonoBehaviour
 
 {
+    [SerializeField] GameObject particles;
     bool used;
     void Start()
     {
@@ -17,6 +18,8 @@ public class UnlockingDoubleJump : MonoBehaviour
         if(collision.CompareTag("Player") && !used)
         {
             used = true;
+            GameObject _particles = Instantiate(particles, transform.position, Quaternion.identity);
+            Destroy(_particles, 0.5f);
             PlayerController.Instance.unlockedDoubleJump = true;
 
             Destroy(gameObject);

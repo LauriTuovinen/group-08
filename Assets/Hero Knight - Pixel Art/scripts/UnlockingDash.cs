@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UnlockingDash : MonoBehaviour
 {
+    [SerializeField] GameObject particles;
     bool used;
     void Start()
     {
@@ -16,6 +17,8 @@ public class UnlockingDash : MonoBehaviour
         if(collision.CompareTag("Player") && !used)
         {
             used = true;
+            GameObject _particles = Instantiate(particles, transform.position, Quaternion.identity);
+            Destroy(_particles, 0.5f);
             PlayerController.Instance.unlockedDash = true;
 
             Destroy(gameObject);
