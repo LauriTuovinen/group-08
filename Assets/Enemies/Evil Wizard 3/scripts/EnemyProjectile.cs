@@ -2,16 +2,13 @@ using UnityEngine;
 
 public class EnemyProjectile : Enemy
 {
-
-    [SerializeField] private AudioSource audioSource1;
-    [SerializeField] private AudioSource audioSource2;
     public float force;
 
     private float timer;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
         Awake();
-        audioSource1.Play();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
@@ -22,6 +19,7 @@ public class EnemyProjectile : Enemy
         transform.rotation = Quaternion.Euler(0, 0, rot);
     }
 
+    // Update is called once per frame
     protected override void Update()
     {
         timer += Time.deltaTime;
@@ -44,8 +42,6 @@ public class EnemyProjectile : Enemy
         else if (other.gameObject.CompareTag("Ground"))
         {
             anim.SetTrigger("hit");
-            audioSource1.Stop();
-            audioSource2.Play();
             rb.linearVelocity = Vector2.zero;
             Invoke("DestroyComponent", 0.583f);
         }
