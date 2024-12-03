@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 76642ac4725d8a1428ed94dbe7248e9f
+guid: a70587de8a3abf44da8cba5012d0fa7e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7924943432731760927
-    second: strength_potion_0
+      213: 1239187260319366027
+    second: File5_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: strength_potion_0
+      name: File5_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 512
+        x: 10
+        y: 84
+        width: 43
+        height: 214
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e665f2afe1f40290800000000000000
-      internalID: -7924943432731760927
+      spriteID: b8b768d6f3a723110800000000000000
+      internalID: 1239187260319366027
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6c52869ef41b25346820f46ce2da762a
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      strength_potion_0: -7924943432731760927
+      File5_0: 1239187260319366027
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

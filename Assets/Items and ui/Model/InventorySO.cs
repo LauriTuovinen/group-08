@@ -16,7 +16,7 @@ namespace Inventory.model
 
         [field: SerializeField]
 
-        public int Size { get; private set; } = 10;
+        public int Size { get; private set; }
 
         public event Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
 
