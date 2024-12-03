@@ -1,13 +1,14 @@
 using UnityEngine;
 
 [CreateAssetMenu]
+
 public class CharacterStatHealthModifierSO : CharacterStatModifierSO
 {
     public override void AffectCharacter(GameObject character, float val)
     {
-        // Health health = character.GetComponent<Health>();
-        // if(health != null)
-        // health.AddHealth((int)val);
+        PlayerController playerController = character.GetComponent<PlayerController>();
+        if (playerController != null)
+            playerController.GainHealth((int)val);
         Debug.Log(character + " restores " + val + " health");
     }
 }

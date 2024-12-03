@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: afda6b156b459534587f5f6b232b322c
+guid: fd3f23bc6d8b4c8499893d5f9c10566c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3861579366159045020
-    second: health_potion_0
+      213: -3660571561243988826
+    second: File1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: health_potion_0
+      name: File1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 512
+        x: 62
+        y: 29
+        width: 467
+        height: 347
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c9153e759f5179530800000000000000
-      internalID: 3861579366159045020
+      spriteID: 6aca7214f89033dc0800000000000000
+      internalID: -3660571561243988826
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d0ace4b3aa4545f4e87bc1e1e7e49605
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      health_potion_0: 3861579366159045020
+      File1_0: -3660571561243988826
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
