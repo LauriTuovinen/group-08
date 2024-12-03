@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8b5761cfc7a9c46b7ba45da4d56d51, type: 3}
+  m_Name: StrengthPotion
+  m_EditorClassIdentifier: 
+  <IsStackable>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 1
+  <Name>k__BackingField: Strength Potion
+  <Description>k__BackingField: Gives you more attack damage
+  <ItemImage>k__BackingField: {fileID: -7924943432731760927, guid: 76642ac4725d8a1428ed94dbe7248e9f, type: 3}
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: 2c923d27a2e2b074da848a9e2a2a7d5b, type: 2}
+    value: 1
+  <actionSFX>k__BackingField: {fileID: 8300000, guid: e06081b6738662744b454b50b5725f44, type: 3}
