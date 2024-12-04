@@ -28,6 +28,7 @@ public class UnlockingDoubleJump : MonoBehaviour
     {
         GameObject _particles = Instantiate(particles, transform.position, Quaternion.identity);
         Destroy(_particles, 0.5f);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSeconds(0.5f);
 
         canvasUI.SetActive(true);
