@@ -10,6 +10,7 @@ public class Attack : Enemy
     public override void Start()
     {
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         Awake();
     }
 
@@ -19,6 +20,8 @@ public class Attack : Enemy
         if (health <= 0)
         {
             Die();
+            
+            rb.gravityScale = 50;
         }
         if (isRecoiling)
         {

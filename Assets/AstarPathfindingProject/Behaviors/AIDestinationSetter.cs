@@ -7,12 +7,12 @@ namespace Pathfinding
 	[HelpURL("http://arongranberg.com/astar/docs/class_pathfinding_1_1_a_i_destination_setter.php")]
 	public class AIDestinationSetter : VersionedMonoBehaviour
 	{
-		public Transform target;   // The target object this AI should follow
+		public Transform target;
 		public float range = 5.0f;
 		private bool targetInRange = false;
 		private IAstarAI ai;
-		private bool targetInTriggerZone = false;  // Flag to track if the target is in this enemy's TriggerZone
-		public GameObject triggerZone;
+		private bool targetInTriggerZone = false;
+ 		public GameObject triggerZone;
 		void OnEnable()
 		{
 			ai = GetComponent<IAstarAI>();
@@ -57,5 +57,9 @@ namespace Pathfinding
 		{
 			Debug.Log("Target exited");
 		}
+	    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(triggerZone.transform.position, range);
+    }
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,8 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCooldown;
 
     [SerializeField] private Transform groundCheckpoint;
-    [SerializeField] private float groundCheckY = 0.2f; 
-    [SerializeField] private float groundCheckX = 0.5f; 
+    [SerializeField] private float groundCheckY = 0.2f;
+    [SerializeField] private float groundCheckX = 0.5f;
     [SerializeField] private LayerMask whatIsGround;
 
     private bool canDash = true;
@@ -38,9 +39,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerStateList pState;
     private Rigidbody2D rb;
     private float xAxis, yAxis;
-    Animator anim; 
+    Animator anim;
     bool attack = false;
-    [SerializeField] private float timeBetweenAttack; 
+    [SerializeField] private float timeBetweenAttack;
     private float timeSinceAttack;
     private float gravity;
 
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 sideAttackArea, upAttackArea, downAttackArea;
     [SerializeField] LayerMask attackableLayer;
     [SerializeField] float damage;
-    [SerializeField] GameObject slashEffect; 
+    [SerializeField] GameObject slashEffect;
     public static PlayerController Instance;
 
     public bool unlockedDoubleJump;
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else 
+        else
         {
             Instance = this;
         }
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         pState = GetComponent<PlayerStateList>();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent <Animator>();
+        anim = GetComponent<Animator>();
         gravity = rb.gravityScale;
     }
 
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(pState.alive)
+        if (pState.alive)
         {
             GetInputs();
             UpdateJumpVariables();
@@ -99,7 +100,7 @@ public class PlayerController : MonoBehaviour
             StartDash();
             Attack();
             Recoil();
-            
+
         }
     }
 
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
     void Flip()
     {
-        if(xAxis < 0)
+        if (xAxis < 0)
         {
             transform.localScale = new Vector2(-1, transform.localScale.y);
             pState.lookingRight = false;
@@ -125,7 +126,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Move() 
+    private void Move()
     {
         rb.linearVelocity = new Vector2(walkSpeed * xAxis, rb.linearVelocity.y);
         anim.SetBool("running", rb.linearVelocity.x != 0 && Grounded());
@@ -133,13 +134,13 @@ public class PlayerController : MonoBehaviour
 
     void StartDash()
     {
-        if(Input.GetButtonDown("Dash") && canDash && !dashed && unlockedDash)
+        if (Input.GetButtonDown("Dash") && canDash && !dashed && unlockedDash)
         {
             StartCoroutine(Dash());
             dashed = true;
         }
 
-        if(Grounded())
+        if (Grounded())
         {
             dashed = false;
         }
@@ -162,23 +163,23 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         timeSinceAttack += Time.deltaTime;
-        if(attack && timeSinceAttack >= timeBetweenAttack)
+        if (attack && timeSinceAttack >= timeBetweenAttack)
         {
             timeSinceAttack = 0;
             anim.SetTrigger("attacking");
             Debug.Log("Attack!");
 
-            if(yAxis == 0 || yAxis < 0 && Grounded())
+            if (yAxis == 0 || yAxis < 0 && Grounded())
             {
                 Hit(sideAttackTransform, sideAttackArea, ref pState.recoilX, recoilXSpeed);
                 Instantiate(slashEffect, sideAttackTransform);
             }
-            else if(yAxis > 0)
+            else if (yAxis > 0)
             {
                 Hit(upAttackTransform, upAttackArea, ref pState.recoilY, recoilYSpeed);
                 SlashEffectAngle(slashEffect, 90, upAttackTransform);
             }
-            else if(yAxis < 0 && !Grounded())
+            else if (yAxis < 0 && !Grounded())
             {
                 Hit(downAttackTransform, downAttackArea, ref pState.recoilY, recoilYSpeed);
                 SlashEffectAngle(slashEffect, -90, downAttackTransform);
@@ -189,16 +190,16 @@ public class PlayerController : MonoBehaviour
     private void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool recoilDir, float recoilStrength)
     {
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
-        List<Enemy>hitEnemies = new List<Enemy>();
+        List<Enemy> hitEnemies = new List<Enemy>();
 
-        if(objectsToHit.Length > 0)
+        if (objectsToHit.Length > 0)
         {
             recoilDir = true;
         }
-        for(int i = 0; i < objectsToHit.Length; i++)
+        for (int i = 0; i < objectsToHit.Length; i++)
         {
             Enemy e = objectsToHit[i].GetComponent<Enemy>();
-            if(e && !hitEnemies.Contains(e))
+            if (e && !hitEnemies.Contains(e))
             {
                 e.EnemyHit(damage, (transform.position - objectsToHit[i].transform.position).normalized, recoilStrength);
                 hitEnemies.Add(e);
@@ -209,15 +210,15 @@ public class PlayerController : MonoBehaviour
     void SlashEffectAngle(GameObject slashEffect, int effectAngle, Transform attackTransform)
     {
         slashEffect = Instantiate(slashEffect, attackTransform);
-        slashEffect.transform.eulerAngles = new Vector3(0,0, effectAngle);
+        slashEffect.transform.eulerAngles = new Vector3(0, 0, effectAngle);
         slashEffect.transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
     }
 
     void Recoil()
     {
-        if(pState.recoilX)
+        if (pState.recoilX)
         {
-            if(pState.lookingRight)
+            if (pState.lookingRight)
             {
                 rb.linearVelocity = new Vector2(-recoilXSpeed, 0);
             }
@@ -226,11 +227,11 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity = new Vector2(recoilXSpeed, 0);
             }
         }
-        
+
         if (pState.recoilY)
-        {                
+        {
             rb.gravityScale = 0;
-            if(yAxis < 0)
+            if (yAxis < 0)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocityX, recoilYSpeed);
             }
@@ -244,7 +245,7 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = gravity;
         }
 
-        if(pState.recoilX && stepsXRecoil < recoilXSteps)
+        if (pState.recoilX && stepsXRecoil < recoilXSteps)
         {
             stepsXRecoil++;
         }
@@ -253,7 +254,7 @@ public class PlayerController : MonoBehaviour
             StopRecoilX();
         }
 
-        if(pState.recoilY && stepsYRecoil < recoilYSteps)
+        if (pState.recoilY && stepsYRecoil < recoilYSteps)
         {
             stepsYRecoil++;
         }
@@ -261,8 +262,8 @@ public class PlayerController : MonoBehaviour
         {
             StopRecoilY();
         }
-        
-        if(Grounded())
+
+        if (Grounded())
         {
             StopRecoilY();
         }
@@ -280,10 +281,10 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        if(pState.alive)
+        if (pState.alive)
         {
             Health -= Mathf.RoundToInt(damage);
-            if(Health <= 0)
+            if (Health <= 0)
             {
                 Health = 0;
                 StartCoroutine(Death());
@@ -305,14 +306,14 @@ public class PlayerController : MonoBehaviour
 
     public int Health
     {
-        get{return health;}
+        get { return health; }
         set
         {
-            if(health != value)
+            if (health != value)
             {
                 health = Mathf.Clamp(value, 0, maxHealth);
 
-                if(onHealthChangedCallback != null)
+                if (onHealthChangedCallback != null)
                 {
                     onHealthChangedCallback.Invoke();
                 }
@@ -331,13 +332,13 @@ public class PlayerController : MonoBehaviour
 
     public bool Grounded()
     {
-        if(Physics2D.Raycast(groundCheckpoint.position, Vector2.down, groundCheckY, whatIsGround)
+        if (Physics2D.Raycast(groundCheckpoint.position, Vector2.down, groundCheckY, whatIsGround)
             || Physics2D.Raycast(groundCheckpoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround)
             || Physics2D.Raycast(groundCheckpoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, whatIsGround))
         {
             return true;
         }
-        else 
+        else
         {
             return false;
         }
@@ -350,14 +351,14 @@ public class PlayerController : MonoBehaviour
             pState.jumping = false;
         }
 
-        if(!pState.jumping)
+        if (!pState.jumping)
         {
-            if(jumpBufferCounter > 0 && coyoteTimeCounter > 0)
+            if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce);
                 pState.jumping = true;
             }
-            else if(!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump") && unlockedDoubleJump)
+            else if (!Grounded() && airJumpCounter < maxAirJump && Input.GetButtonDown("Jump") && unlockedDoubleJump)
             {
                 pState.jumping = true;
                 airJumpCounter++;
@@ -384,9 +385,22 @@ public class PlayerController : MonoBehaviour
         {
             jumpBufferCounter = jumpBufferFrames;
         }
-        else 
+        else
         {
             jumpBufferCounter = jumpBufferCounter - Time.deltaTime * 10;
         }
+    }
+
+    internal void GainHealth(int val)
+    {
+        if (pState.alive)
+        {
+            Health += val;
+        }
+    }
+
+    internal void GainStrength(int val)
+    {
+        damage += val;
     }
 }
