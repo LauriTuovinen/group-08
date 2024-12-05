@@ -162,8 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98afb203c5dc4904db5585bbcdf54b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  damage: 3
+  health: 5
+  damage: 1
   player: {fileID: 8898579517950503741, guid: 23b20a6595d3308438c293ecad781564, type: 3}
   recoilLenght: 0
   recoilFactor: 0
