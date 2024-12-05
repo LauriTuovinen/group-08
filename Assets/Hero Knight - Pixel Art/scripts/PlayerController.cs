@@ -94,7 +94,11 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        GetInputs();
+        UpdateJumpVariables();
+        if(pState.dashing) return;
+
         if(pState.alive)
         {
             if(!isWallJumping)
@@ -103,12 +107,10 @@ public class PlayerController : MonoBehaviour
                 Move();
                 Jump();
             }
-            GetInputs();
-            UpdateJumpVariables();
-            if (pState.dashing) return;
             
             WallSlide();
             WallJump();
+            
             StartDash();
             Attack();
             Recoil();
@@ -449,6 +451,17 @@ public class PlayerController : MonoBehaviour
     {
         isWallJumping = false;
         transform.eulerAngles = new Vector2(transform.eulerAngles.x, 0);
+    }
+
+    public void GainHealth(int val)
+    {
+       
+            Health += val;
+    }
+
+    public void GainStrength(int val)
+    {
+        damage += val;
     }
 }
 
