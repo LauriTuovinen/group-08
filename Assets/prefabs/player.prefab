@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1388622426453821627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6790248226388708970}
+  m_Layer: 0
+  m_Name: wall check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6790248226388708970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388622426453821627}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.4, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4845355812891582026}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1816832110982320236
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +42,7 @@ GameObject:
   - component: {fileID: 4845355812891582026}
   - component: {fileID: 695034391441244144}
   - component: {fileID: 742869881244389301}
-  - component: {fileID: 4251023195394974914}
+  - component: {fileID: 1293383404327841908}
   - component: {fileID: 3957439905505936111}
   - component: {fileID: 2651092627434922589}
   - component: {fileID: 4602398195876153768}
@@ -35,6 +66,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6790248226388708970}
   - {fileID: 8995401862027531758}
   - {fileID: 5046343196306980332}
   - {fileID: 1509925398304154377}
@@ -124,8 +156,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &4251023195394974914
-BoxCollider2D:
+--- !u!70 &1293383404327841908
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -158,18 +190,9 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.05314389, y: 0.6857195}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 3.125, y: 1.71875}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.9137122, y: 1.2862878}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.03, y: 0.7}
+  m_Size: {x: 1, y: 1.3}
+  m_Direction: 0
 --- !u!114 &3957439905505936111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +238,13 @@ MonoBehaviour:
     m_Bits: 64
   damage: 1
   slashEffect: {fileID: 4063765861175443817, guid: e9ae5f618af0d4c46af70dd64bc2fc46, type: 3}
+  wallSlideSpeed: 2
+  wallCheck: {fileID: 6790248226388708970}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  wallJumpDuration: 0.1
+  wallJumpPower: {x: 15, y: 35}
   unlockedDoubleJump: 0
   unlockedDash: 0
 --- !u!95 &2651092627434922589
