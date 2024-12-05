@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3974ded5f3f214d90afa143085ab91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  damage: 2
+  health: 3
+  damage: 1
   player: {fileID: 8898579517950503741, guid: 23b20a6595d3308438c293ecad781564, type: 3}
   recoilLenght: 0
   recoilFactor: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   speed: 4
   attackRange: 1
   playerObject: {fileID: 1473578299685157736, guid: 23b20a6595d3308438c293ecad781564, type: 3}
-  attackCooldown: 0.5
+  attackCooldown: 0.9
 --- !u!212 &5846860983502488946
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -1,14 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-public class UnlockingDash : MonoBehaviour
+public class UnlockingWallJump : MonoBehaviour
+
 {
     [SerializeField] GameObject particles;
     [SerializeField] GameObject canvasUI;
+
     bool used;
     void Start()
     {
-        if(PlayerController.Instance.unlockedDash)
+        if(PlayerController.Instance.unlockedWallJump)
         {
             Destroy(gameObject);
         }
@@ -20,10 +22,8 @@ public class UnlockingDash : MonoBehaviour
         {
             used = true;
             StartCoroutine(ShowUI());
-
         }
     }
-
     IEnumerator ShowUI()
     {
         GameObject _particles = Instantiate(particles, transform.position, Quaternion.identity);
@@ -34,7 +34,7 @@ public class UnlockingDash : MonoBehaviour
         canvasUI.SetActive(true);
 
         yield return new WaitForSeconds(4f);
-        PlayerController.Instance.unlockedDash = true;
+        PlayerController.Instance.unlockedWallJump = true;
         canvasUI.SetActive(false);
         Destroy(gameObject);
     }

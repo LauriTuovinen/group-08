@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     public bool unlockedDoubleJump;
     public bool unlockedDash;
+    public bool unlockedWallJump;
 
 
     private void Awake()
@@ -411,7 +412,7 @@ public class PlayerController : MonoBehaviour
     }
     void WallSlide()
     {
-        if(Walled() && !Grounded() && xAxis != 0)
+        if(Walled() && !Grounded() && xAxis != 0 && unlockedWallJump)
         {
             isWallSliding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -wallSlideSpeed, float.MaxValue));
