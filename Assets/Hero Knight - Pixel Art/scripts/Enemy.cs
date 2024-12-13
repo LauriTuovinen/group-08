@@ -1,6 +1,8 @@
+using System;
+using NUnit.Framework;
 using UnityEditor.Callbacks;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected float health;
@@ -9,6 +11,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float recoilLenght;
     [SerializeField] protected float recoilFactor;
     [SerializeField] protected bool isRecoiling = false;
+
+    [SerializeField] public GameObject StrenghtPotion;
+    [SerializeField] public GameObject HealthPotion;
+    [SerializeField] public GameObject Apple;
+
+    private bool isDead = false;
 
     protected float recoilTimer;
     protected Rigidbody2D rb;
@@ -28,7 +36,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Update()
     {
 
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
             Die();
         }
@@ -60,10 +68,10 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnTriggerStay2D(Collider2D Other)
     {
-            if (Other.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
-            {
-                Attack();
-            }
+        if (Other.CompareTag("Player") && !PlayerController.Instance.pState.invincible && !isDead)
+        {
+            Attack();
+        }
     }
     protected virtual void Attack()
     {
@@ -71,12 +79,34 @@ public class Enemy : MonoBehaviour
     }
 
     protected void Die()
-    {
+    {   
+        isDead = true;
         rb.linearVelocity = Vector2.zero;
         anim.SetTrigger("noHp");
 
+        Invoke("SpawnItem", 2f);
         Invoke("DestroyComponent", 2f);
+        Debug.Log("vihu kuoli");
     }
+
+    private void SpawnItem()
+    {   
+        int itemSpawn = Random.Range(0, 10);
+
+        if (itemSpawn == 1 || itemSpawn == 2)
+        {
+            Instantiate(HealthPotion, transform.position, Quaternion.identity);
+        }
+        else if (itemSpawn == 3 || itemSpawn == 4)
+        {
+            Instantiate(StrenghtPotion, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(Apple, transform.position, Quaternion.identity);
+        }
+    }
+
     protected void DestroyComponent()
     {
         GetComponent<Collider2D>().enabled = false;

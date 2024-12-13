@@ -11,7 +11,7 @@ namespace Pathfinding
         public float range = 5.0f;
         private bool targetInRange = false;
         private IAstarAI ai;
-        private bool targetInTriggerZone = false;
+        // private bool targetInTriggerZone = false;
          public GameObject triggerZone;
         void OnEnable()
         {

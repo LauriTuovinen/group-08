@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 7542827129855708288}
   - component: {fileID: 3067621648052561451}
   - component: {fileID: 5322094991693851141}
-  - component: {fileID: 4137353196188955703}
+  - component: {fileID: 4710568288606710190}
   m_Layer: 0
   m_Name: Unlock Dash 1
   m_TagString: Untagged
@@ -461,7 +461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4469624710698083000}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.5, y: 4.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -589,7 +589,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &4137353196188955703
+--- !u!114 &4710568288606710190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4469624710698083000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2bab1d7c8e39874689552147d0291ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 294823f3a059b7d43bffbbf1b961edaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 8563455181919005174}

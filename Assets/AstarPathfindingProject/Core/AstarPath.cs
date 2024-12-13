@@ -675,11 +675,14 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// This is useful if you want to do changes to the graphs in the editor outside of play mode, but cannot be sure that the graphs have been deserialized yet.
 	/// In play mode this method does nothing.
 	/// </summary>
-	public static void FindAstarPath () {
-		if (Application.isPlaying) return;
-		if (active == null) active = GameObject.FindObjectOfType<AstarPath>();
-		if (active != null && (active.data.graphs == null || active.data.graphs.Length == 0)) active.data.DeserializeGraphs();
-	}
+public static void FindAstarPath() {
+    if (Application.isPlaying) return;
+    if (active == null) {
+    var results = FindObjectsByType<AstarPath>(FindObjectsSortMode.None);
+    active = results.Length > 0 ? results[0] : null;
+}
+    if (active != null && (active.data.graphs == null || active.data.graphs.Length == 0)) active.data.DeserializeGraphs();
+}
 
 	/// <summary>
 	/// Tries to find an AstarPath object and return tag names.
@@ -1222,7 +1225,7 @@ public class AstarPath : VersionedMonoBehaviour {
 		// Very important to set this. Ensures the singleton pattern holds
 		active = this;
 
-		if (FindObjectsOfType(typeof(AstarPath)).Length > 1) {
+		if (FindObjectsByType<AstarPath>(FindObjectsSortMode.None).Length > 1) {
 			Debug.LogError("You should NOT have more than one AstarPath component in the scene at any time.\n" +
 				"This can cause serious errors since the AstarPath component builds around a singleton pattern.");
 		}

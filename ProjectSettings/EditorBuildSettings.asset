@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/TestiSceneEetu.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/menu.unity
     guid: 3ccdda119e538874880b64bf811ccc82
   - enabled: 1
+    path: Assets/Scenes/TestiSceneEetu.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 0
     path: Assets/Scenes/TestiSceneH.unity
     guid: d57d8e3efd9c6eb46b9b4c67da21aca0
   m_configObjects:

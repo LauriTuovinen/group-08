@@ -54,15 +54,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float wallJumpDuration;
     [SerializeField] private Vector2 wallJumpPower; 
+    [SerializeField] private GameObject myCanvas;
     float wallJumpDirection;
     bool isWallSliding;
     bool isWallJumping;
-    public static PlayerController Instance;
-
     public bool unlockedDoubleJump;
     public bool unlockedDash;
     public bool unlockedWallJump;
-
+    public static PlayerController Instance;
 
     private void Awake()
     {
@@ -96,10 +95,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {   
-        GetInputs();
+        if(pState.alive)
+        {
+            GetInputs();
+        }
         UpdateJumpVariables();
         if(pState.dashing) return;
-
         if(pState.alive)
         {
             if(!isWallJumping)
@@ -108,14 +109,11 @@ public class PlayerController : MonoBehaviour
                 Move();
                 Jump();
             }
-            
             WallSlide();
             WallJump();
-            
             StartDash();
             Attack();
             Recoil();
-            
         }
     }
 
@@ -311,6 +309,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Hazard"))
+        {
+            Health = 0;
+            StartCoroutine(Death());
+        }
+    }
+
     IEnumerator StopDamage()
     {
         pState.invincible = true;
@@ -338,11 +345,24 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Death()
     {
+        myCanvas.SetActive(false);
         pState.alive = false;
         Time.timeScale = 1f;
         anim.SetTrigger("Death");
 
         yield return new WaitForSeconds(0.9f);
+        StartCoroutine(UIManager.Instance.ActiveDeathScreen());
+    }
+
+    public void Respawned()
+    {
+        if(!pState.alive)
+        {
+            myCanvas.SetActive(true);
+            pState.alive = true;
+            Health = maxHealth;
+            anim.Play("HeroKnight_Idle");
+        }
     }
 
     public bool Grounded()

@@ -55,6 +55,9 @@ MonoBehaviour:
   recoilLenght: 0
   recoilFactor: 0
   isRecoiling: 0
+  StrenghtPotion: {fileID: 3884470611615520750, guid: b013051e3794b704c885703e9d53c8b7, type: 3}
+  HealthPotion: {fileID: 8348744608448056184, guid: 83097172960d71147b7deb4c3941f243, type: 3}
+  Apple: {fileID: 7665077843574593961, guid: e46fc314280df1c4d9147025a5a99745, type: 3}
   anim: {fileID: 0}
   pointA: {fileID: 5507477295108152237}
   pointB: {fileID: 1621795688565332440}
@@ -229,7 +232,7 @@ Transform:
   m_GameObject: {fileID: 1621795688565332440}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.385, y: 0.32, z: -9.977911}
+  m_LocalPosition: {x: 0.04, y: 0.32, z: -9.977911}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -294,7 +297,7 @@ Transform:
   m_GameObject: {fileID: 5507477295108152237}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.961, y: 0.345, z: -9.977911}
+  m_LocalPosition: {x: 4.4, y: 0.345, z: -9.977911}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
