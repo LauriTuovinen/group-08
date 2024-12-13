@@ -15,18 +15,17 @@ public class Item : MonoBehaviour
     private AudioSource audioSource;
 
     [SerializeField]
-    private float duration = 0.3f;
+    private float duration = 0.7f;
 
     private void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = InventoryItem.ItemImage;
+         GetComponent<SpriteRenderer>().sprite = InventoryItem.ItemImage;
     }
 
     public void DestroyItem()
     {
         GetComponent<Collider2D>().enabled = false;
         StartCoroutine(AnimateItemPickup());
-
     }
 
     private IEnumerator AnimateItemPickup()

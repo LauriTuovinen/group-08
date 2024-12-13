@@ -20,7 +20,6 @@ public class UnlockingDash : MonoBehaviour
         {
             used = true;
             StartCoroutine(ShowUI());
-
         }
     }
 

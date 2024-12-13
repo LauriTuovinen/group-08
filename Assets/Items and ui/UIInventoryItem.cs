@@ -51,7 +51,7 @@ namespace Inventory.UI
         {
             borderImage.enabled = true;
         }
-
+        
         public void OnPointerClick(PointerEventData pointerData)
         {
             if (pointerData.button == PointerEventData.InputButton.Right)

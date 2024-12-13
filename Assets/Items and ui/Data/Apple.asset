@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f8b5761cfc7a9c46b7ba45da4d56d51, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  <IsStackable>k__BackingField: 0
-  <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: 
-  <Description>k__BackingField: 
-  <ItemImage>k__BackingField: {fileID: 0}
-  modifiersData: []
-  <actionSFX>k__BackingField: {fileID: 0}
+  <IsStackable>k__BackingField: 1
+  <MaxStackSize>k__BackingField: 3
+  <Name>k__BackingField: Apple
+  <Description>k__BackingField: Restores 1 Health
+  <ItemImage>k__BackingField: {fileID: -7832214784768987486, guid: 20e36ff47332aa24e962d24b0687a33c, type: 3}
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: 3cec032772d059b4790db6bc77ce1789, type: 2}
+    value: 1
+  <actionSFX>k__BackingField: {fileID: 8300000, guid: ce82f9748d6fa0f418f46db2574eb08e, type: 3}

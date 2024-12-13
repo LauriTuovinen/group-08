@@ -87,6 +87,9 @@ MonoBehaviour:
   recoilLenght: 0
   recoilFactor: 0
   isRecoiling: 0
+  StrenghtPotion: {fileID: 3884470611615520750, guid: b013051e3794b704c885703e9d53c8b7, type: 3}
+  HealthPotion: {fileID: 8348744608448056184, guid: 83097172960d71147b7deb4c3941f243, type: 3}
+  Apple: {fileID: 7665077843574593961, guid: e46fc314280df1c4d9147025a5a99745, type: 3}
   anim: {fileID: 0}
 --- !u!114 &7635942491421274008
 MonoBehaviour:
